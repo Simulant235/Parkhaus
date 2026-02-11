@@ -21,6 +21,22 @@ public class DatabaseService
         return await _database.Table<ParkingEntry>().Where(i => i.IsActive).ToListAsync();
     }
 
+    public async Task<ParkingEntry?> GetActiveEntryByLicensePlateAsync(string licensePlate)
+    {
+        await Init();
+        return await _database.Table<ParkingEntry>()
+            .Where(e => e.LicensePlate == licensePlate && e.IsActive == true)
+            .FirstOrDefaultAsync();
+    }
+
+    public async Task<int> GetActiveCountAsync()
+    {
+        await Init();
+        return await _database.Table<ParkingEntry>()
+            .Where(e => e.IsActive == true)
+            .CountAsync();
+    }
+
     public async Task<int> SaveEntryAsync(ParkingEntry entry)
     {
         await Init();
