@@ -21,7 +21,9 @@ public static class MauiProgram
         builder.Services.AddSingleton<DatabaseService>();
 
         // Views registrieren (Wichtig für Dependency Injection)
-        builder.Services.AddTransient<EntryPage>(); // <--- HIER EINGEFÜGT
+        builder.Services.AddTransient<EntryPage>();
+        builder.Services.AddTransient<PaymentPage>();
+        builder.Services.AddTransient<ExitPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();
