@@ -29,6 +29,15 @@ public class DatabaseService
             .FirstOrDefaultAsync();
     }
 
+    public async Task<ParkingEntry?> GetLatestEntryByLicensePlateAsync(string licensePlate)
+    {
+        await Init();
+        return await _database.Table<ParkingEntry>()
+            .Where(e => e.LicensePlate == licensePlate)
+            .OrderByDescending(e => e.EntryTime)
+            .FirstOrDefaultAsync();
+    }
+
     public async Task<int> GetActiveCountAsync()
     {
         await Init();

@@ -3,17 +3,142 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Parkhaus.Views.PaymentPage"
              Title="Bezahlen">
-    
-    <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
-        <Label Text="💳 Bezahlung"
-               FontSize="32"
-               FontAttributes="Bold"
-               HorizontalOptions="Center"
-               TextColor="#2B3C50" />
-        
-        <Label Text="Bezahlfunktion wird später implementiert"
-               FontSize="18"
-               HorizontalOptions="Center"
-               TextColor="#666" />
-    </VerticalStackLayout>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="30" Spacing="25">
+
+            <!-- Titel -->
+            <Label Text="💳 Bezahlung"
+                   FontSize="32"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#2B3C50"
+                   Margin="0,20,0,0" />
+
+            <!-- Kennzeichen Eingabe -->
+            <Label Text="Kennzeichen eingeben"
+                   FontSize="20"
+                   HorizontalOptions="Center"
+                   Margin="0,20,0,0" />
+
+            <Entry x:Name="LicenseEntry"
+                   Placeholder="z.B. ZH 123456"
+                   FontSize="18"
+                   HorizontalOptions="Fill"
+                   HorizontalTextAlignment="Center" />
+
+            <!-- Suchen Button -->
+            <Button Text="Fahrzeug suchen"
+                    Clicked="OnSearchClicked"
+                    BackgroundColor="#2B3C50"
+                    TextColor="White"
+                    HeightRequest="50"
+                    FontSize="18"
+                    CornerRadius="10" />
+
+            <!-- Rechnung Anzeige (Anfangs versteckt) -->
+            <Border x:Name="InvoiceContainer"
+                    IsVisible="False"
+                    Stroke="#2B3C50"
+                    StrokeThickness="2"
+                    Padding="20"
+                    Background="#F9F9F9"
+                    Margin="0,20,0,0">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+
+                <VerticalStackLayout Spacing="15">
+                    <!-- Rechnung Titel -->
+                    <Label Text="📋 Parkrechnung"
+                           FontSize="24"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           TextColor="#2B3C50" />
+
+                    <BoxView HeightRequest="2" Color="#E0E0E0" Margin="0,5,0,5" />
+
+                    <!-- Kennzeichen -->
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="Kennzeichen:"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               WidthRequest="120" />
+                        <Label x:Name="InvoicePlate"
+                               Text="--"
+                               FontSize="16" />
+                    </HorizontalStackLayout>
+
+                    <!-- Einfahrt -->
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="Einfahrt:"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               WidthRequest="120" />
+                        <Label x:Name="InvoiceEntryTime"
+                               Text="--"
+                               FontSize="16" />
+                    </HorizontalStackLayout>
+
+                    <!-- Ausfahrt -->
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="Ausfahrt:"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               WidthRequest="120" />
+                        <Label x:Name="InvoiceExitTime"
+                               Text="--"
+                               FontSize="16" />
+                    </HorizontalStackLayout>
+
+                    <!-- Parkdauer -->
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="Parkdauer:"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               WidthRequest="120" />
+                        <Label x:Name="InvoiceDuration"
+                               Text="--"
+                               FontSize="16" />
+                    </HorizontalStackLayout>
+
+                    <BoxView HeightRequest="2" Color="#E0E0E0" Margin="0,5,0,5" />
+
+                    <!-- Gesamtbetrag -->
+                    <HorizontalStackLayout Spacing="10">
+                        <Label Text="Gesamtbetrag:"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               WidthRequest="120"
+                               TextColor="#2B3C50" />
+                        <Label x:Name="InvoiceTotal"
+                               Text="CHF 0.00"
+                               FontSize="20"
+                               FontAttributes="Bold"
+                               TextColor="#2B3C50" />
+                    </HorizontalStackLayout>
+
+                    <!-- Bezahlen Button -->
+                    <Button x:Name="PayButton"
+                            Text="Bezahlen"
+                            Clicked="OnPayClicked"
+                            BackgroundColor="#4CAF50"
+                            TextColor="White"
+                            HeightRequest="55"
+                            FontSize="18"
+                            FontAttributes="Bold"
+                            CornerRadius="10"
+                            Margin="0,15,0,0" />
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Status Label -->
+            <Label x:Name="StatusLabel"
+                   TextColor="Red"
+                   FontSize="16"
+                   HorizontalOptions="Center"
+                   Margin="0,10,0,0" />
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
