@@ -7,7 +7,7 @@
     <VerticalStackLayout Padding="30" Spacing="25" VerticalOptions="Center">
 
         <!-- Parkhausname -->
-        <Label Text="🅿️ Parkhaus Zentrum"
+        <Label Text="Parkhaus Zentrum"
                FontSize="32"
                FontAttributes="Bold"
                HorizontalOptions="Center"

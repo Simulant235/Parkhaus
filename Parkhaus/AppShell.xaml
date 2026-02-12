@@ -6,15 +6,15 @@
        Shell.FlyoutBehavior="Disabled">
 
     <TabBar>
-        <Tab Title="Einfahrt" Icon="dotnet_bot.png">
+        <Tab Title="Einfahrt">
             <ShellContent ContentTemplate="{DataTemplate views:EntryPage}" />
         </Tab>
 
-        <Tab Title="Bezahlen" Icon="dotnet_bot.png">
+        <Tab Title="Bezahlen">
             <ShellContent ContentTemplate="{DataTemplate views:PaymentPage}" />
         </Tab>
 
-        <Tab Title="Ausfahrt" Icon="dotnet_bot.png">
+        <Tab Title="Ausfahrt">
             <ShellContent ContentTemplate="{DataTemplate views:ExitPage}" />
         </Tab>
     </TabBar>

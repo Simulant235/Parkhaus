@@ -5,7 +5,7 @@
              Title="Ausfahrt">
 
     <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
-        <Label Text="🚗 Ausfahrt"
+        <Label Text="Ausfahrt"
                FontSize="32"
                FontAttributes="Bold"
                HorizontalOptions="Center"
