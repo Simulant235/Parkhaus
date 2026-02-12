@@ -59,6 +59,15 @@ public partial class EntryPage : ContentPage
             return;
         }
 
+        // Prüfen ob Parkhaus voll ist
+        int activeCount = await _dbService.GetActiveCountAsync();
+        if (activeCount >= MaxCapacity)
+        {
+            StatusLabel.Text = "Parkhaus ist voll!";
+            StatusLabel.TextColor = Colors.Red;
+            return;
+        }
+
         var newEntry = new ParkingEntry
         {
             LicensePlate = plate,

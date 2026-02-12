@@ -62,7 +62,7 @@ public partial class ExitPage : ContentPage
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Fehler", $"Datenbankfehler: {ex.Message}", "OK");
+            await DisplayAlert("Fehler", "Datenbankfehler", "OK");
         }
     }
 }

@@ -60,7 +60,7 @@ public partial class PaymentPage : ContentPage
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Fehler", $"Datenbankfehler: {ex.Message}", "OK");
+            await DisplayAlertAsync("Fehler", "Datenbankfehler", "OK");
         }
     }
 
@@ -101,7 +101,7 @@ public partial class PaymentPage : ContentPage
         // Prüfen ob bereits bezahlt wurde (Doppel-Bezahlung verhindern)
         if (!_currentEntry.IsActive)
         {
-            await DisplayAlert("Hinweis", "Diese Rechnung wurde bereits bezahlt!", "OK");
+            await DisplayAlertAsync("Hinweis", "Diese Rechnung wurde bereits bezahlt!", "OK");
             ResetForm();
             return;
         }
@@ -124,14 +124,14 @@ public partial class PaymentPage : ContentPage
             var totalFee = _currentEntry.TotalFee;
             ResetForm();
 
-            await DisplayAlert("Bezahlt", 
+            await DisplayAlertAsync("Bezahlt", 
                 $"Die Zahlung von CHF {totalFee:F2} wurde erfolgreich erhalten.\n\nSie können sich nun zum Ausgang begeben.", 
                 "OK");
         }
         catch (Exception ex)
         {
             PayButton.IsEnabled = true; // Bei Fehler wieder aktivieren
-            await DisplayAlert("Fehler", $"Fehler beim Speichern: {ex.Message}", "OK");
+            await DisplayAlertAsync("fehler", "Fehler beim Speichern.", "OK");
         }
     }
 
