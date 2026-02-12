@@ -21,14 +21,7 @@ public class DatabaseService
         return await _database.Table<ParkingEntry>().Where(i => i.IsActive).ToListAsync();
     }
 
-    public async Task<ParkingEntry?> GetActiveEntryByLicensePlateAsync(string licensePlate)
-    {
-        await Init();
-        return await _database.Table<ParkingEntry>()
-            .Where(e => e.LicensePlate == licensePlate && e.IsActive == true)
-            .FirstOrDefaultAsync();
-    }
-
+    // Findet den NEUESTEN Eintrag (egal ob drin/draußen, bezahlt/unbezahlt)
     public async Task<ParkingEntry?> GetLatestEntryByLicensePlateAsync(string licensePlate)
     {
         await Init();
@@ -38,11 +31,31 @@ public class DatabaseService
             .FirstOrDefaultAsync();
     }
 
+    // Findet Autos die DRIN sind (egal ob bezahlt)
+    public async Task<ParkingEntry?> GetEntryStillInsideAsync(string licensePlate)
+    {
+        await Init();
+        return await _database.Table<ParkingEntry>()
+            .Where(e => e.LicensePlate == licensePlate && e.IsStillInside == true)
+            .FirstOrDefaultAsync();
+    }
+
+    // Findet Autos die DRIN sind UND NICHT bezahlt haben
+    public async Task<ParkingEntry?> GetUnpaidEntryAsync(string licensePlate)
+    {
+        await Init();
+        return await _database.Table<ParkingEntry>()
+            .Where(e => e.LicensePlate == licensePlate 
+                     && e.IsStillInside == true 
+                     && e.IsActive == true)
+            .FirstOrDefaultAsync();
+    }
+
     public async Task<int> GetActiveCountAsync()
     {
         await Init();
         return await _database.Table<ParkingEntry>()
-            .Where(e => e.IsActive == true)
+            .Where(e => e.IsStillInside == true)
             .CountAsync();
     }
 

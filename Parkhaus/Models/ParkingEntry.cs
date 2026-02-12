@@ -17,4 +17,6 @@ public class ParkingEntry
     public decimal TotalFee { get; set; }
 
     public bool IsActive { get; set; }
+
+    public bool IsStillInside { get; set; }
 }
