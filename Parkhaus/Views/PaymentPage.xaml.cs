@@ -141,5 +141,6 @@ public partial class PaymentPage : ContentPage
         InvoiceContainer.IsVisible = false;
         StatusLabel.Text = string.Empty;
         _currentEntry = null;
+        PayButton.IsEnabled = true;  // Button wieder aktivieren!
     }
 }
