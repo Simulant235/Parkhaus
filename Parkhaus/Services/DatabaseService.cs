@@ -14,10 +14,11 @@ public class DatabaseService
         _database = new SQLiteAsyncConnection(dbPath);
         await _database.CreateTableAsync<ParkingEntry>();
     }
-
+    //Tast = Auftrag
     public async Task<List<ParkingEntry>> GetActiveEntriesAsync()
     {
         await Init();
+        //  Nimmt jedes Itemwelches Aktiv ist
         return await _database.Table<ParkingEntry>().Where(i => i.IsActive).ToListAsync();
     }
 

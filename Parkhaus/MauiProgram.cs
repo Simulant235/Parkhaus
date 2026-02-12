@@ -20,7 +20,7 @@ public static class MauiProgram
         // Services registrieren (Einmalig für die App)
         builder.Services.AddSingleton<DatabaseService>();
 
-        // Views registrieren (Wichtig für Dependency Injection)
+        // Views registrieren (Bei allem erneuert)
         builder.Services.AddTransient<EntryPage>();
         builder.Services.AddTransient<PaymentPage>();
         builder.Services.AddTransient<ExitPage>();
