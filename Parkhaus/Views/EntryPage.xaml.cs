@@ -17,6 +17,7 @@ public partial class EntryPage : ContentPage
 
     protected override async void OnAppearing()
     {
+        // Damit die freien Plätze immer aktuell ist
         base.OnAppearing();
         await UpdateAvailableSpotsAsync();
     }
@@ -76,9 +77,19 @@ public partial class EntryPage : ContentPage
             IsStillInside = true
         };
 
-        await _dbService.SaveEntryAsync(newEntry);
+        try
+        {
+            await _dbService.SaveEntryAsync(newEntry);
+        }
+        catch
+        {
+            await DisplayAlertAsync("Fehler", "Fehler beim Speichern!", "OK");
+            StatusLabel.Text = "Fehler beim Speichern!";
+            StatusLabel.TextColor = Colors.Red;
+            return;
+        }
 
-        await DisplayAlert("Erfolg", $"Fahrzeug {plate} eingeparkt!", "OK");
+        await DisplayAlertAsync("Erfolg", $"Fahrzeug {plate} eingeparkt!", "OK");
 
         LicenseEntry.Text = string.Empty;
         StatusLabel.Text = string.Empty;

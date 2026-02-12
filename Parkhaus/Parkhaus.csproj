@@ -66,15 +66,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidResource Remove="Viewmodels\**" />
-	  <Compile Remove="Viewmodels\**" />
-	  <EmbeddedResource Remove="Viewmodels\**" />
-	  <MauiCss Remove="Viewmodels\**" />
-	  <MauiXaml Remove="Viewmodels\**" />
-	  <None Remove="Viewmodels\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="10.0.31" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.3" />
@@ -91,10 +82,6 @@
 	  <MauiXaml Update="Views\PaymentPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Viewmodels\" />
 	</ItemGroup>
 
 </Project>

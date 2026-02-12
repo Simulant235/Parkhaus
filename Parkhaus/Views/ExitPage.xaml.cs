@@ -54,7 +54,7 @@ public partial class ExitPage : ContentPage
             await _dbService.SaveEntryAsync(entry);
 
             // Erfolg
-            await DisplayAlert("Ausfahrt", $"Gute Fahrt!\n\nFahrzeug {plate} hat das Parkhaus verlassen.", "OK");
+            await DisplayAlertAsync("Ausfahrt", $"Gute Fahrt!\n\nFahrzeug {plate} hat das Parkhaus verlassen.", "OK");
 
             // Formular zurücksetzen
             LicenseEntry.Text = string.Empty;
@@ -62,7 +62,7 @@ public partial class ExitPage : ContentPage
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Fehler", "Datenbankfehler", "OK");
+            await DisplayAlertAsync("Fehler", "Datenbankfehler", "OK");
         }
     }
 }

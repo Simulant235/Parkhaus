@@ -96,9 +96,10 @@ public partial class PaymentPage : ContentPage
 
     private async void OnPayClicked(object sender, EventArgs e)
     {
+        // Defencive programing
         if (_currentEntry == null) return;
 
-        // Prüfen ob bereits bezahlt wurde (Doppel-Bezahlung verhindern)
+        // Prüfen ob bereits bezahlt wurde
         if (!_currentEntry.IsActive)
         {
             await DisplayAlertAsync("Hinweis", "Diese Rechnung wurde bereits bezahlt!", "OK");
@@ -141,6 +142,6 @@ public partial class PaymentPage : ContentPage
         InvoiceContainer.IsVisible = false;
         StatusLabel.Text = string.Empty;
         _currentEntry = null;
-        PayButton.IsEnabled = true;  // Button wieder aktivieren!
+        PayButton.IsEnabled = true;
     }
 }
