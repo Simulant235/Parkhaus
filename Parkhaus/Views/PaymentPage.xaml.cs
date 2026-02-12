@@ -36,12 +36,10 @@ public partial class PaymentPage : ContentPage
 
             if (_currentEntry == null)
             {
-                // Prüfen WARUM nicht gefunden
                 var latestEntry = await _dbService.GetLatestEntryByLicensePlateAsync(plate);
 
                 if (latestEntry != null && latestEntry.IsStillInside && !latestEntry.IsActive)
                 {
-                    // ✅ HIER kommt jetzt die richtige Meldung!
                     StatusLabel.Text = "Dieses Fahrzeug wurde bereits bezahlt!";
                     StatusLabel.TextColor = Colors.Red;
                     InvoiceContainer.IsVisible = false;
@@ -123,11 +121,9 @@ public partial class PaymentPage : ContentPage
             // In Datenbank speichern
             await _dbService.SaveEntryAsync(_currentEntry);
 
-            // WICHTIG: Formular SOFORT zurücksetzen (vor DisplayAlert!)
             var totalFee = _currentEntry.TotalFee;
             ResetForm();
 
-            // Erfolgsmeldung (NACH Reset, damit Button nicht mehr klickbar ist)
             await DisplayAlert("Bezahlt", 
                 $"Die Zahlung von CHF {totalFee:F2} wurde erfolgreich erhalten.\n\nSie können sich nun zum Ausgang begeben.", 
                 "OK");

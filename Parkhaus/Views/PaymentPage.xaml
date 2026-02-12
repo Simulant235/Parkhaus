@@ -8,7 +8,7 @@
         <VerticalStackLayout Padding="30" Spacing="25">
 
             <!-- Titel -->
-            <Label Text="💳 Bezahlung"
+            <Label Text="Bezahlung"
                    FontSize="32"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
@@ -50,7 +50,7 @@
 
                 <VerticalStackLayout Spacing="15">
                     <!-- Rechnung Titel -->
-                    <Label Text="📋 Parkrechnung"
+                    <Label Text="Parkrechnung"
                            FontSize="24"
                            FontAttributes="Bold"
                            HorizontalOptions="Center"
