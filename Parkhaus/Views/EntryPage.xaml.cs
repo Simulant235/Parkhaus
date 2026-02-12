@@ -50,8 +50,8 @@ public partial class EntryPage : ContentPage
             return;
         }
 
-        // Prüfen ob Kennzeichen bereits aktiv ist
-        var existing = await _dbService.GetActiveEntryByLicensePlateAsync(plate);
+        // Prüfen ob Kennzeichen bereits im Parkhaus ist (physisch drin)
+        var existing = await _dbService.GetEntryStillInsideAsync(plate);
         if (existing != null)
         {
             StatusLabel.Text = "Fahrzeug ist bereits im Parkhaus!";
@@ -63,7 +63,8 @@ public partial class EntryPage : ContentPage
         {
             LicensePlate = plate,
             EntryTime = DateTime.Now,
-            IsActive = true
+            IsActive = true,
+            IsStillInside = true
         };
 
         await _dbService.SaveEntryAsync(newEntry);

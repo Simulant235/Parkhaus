@@ -31,31 +31,32 @@ public partial class PaymentPage : ContentPage
                 return;
             }
 
-            // Aktiven Eintrag suchen
-            _currentEntry = await _dbService.GetActiveEntryByLicensePlateAsync(plate);
+            // Unbezahlten Eintrag suchen (IsStillInside=true UND IsActive=true)
+            _currentEntry = await _dbService.GetUnpaidEntryAsync(plate);
 
             if (_currentEntry == null)
             {
-                // Prüfen ob überhaupt ein Eintrag existiert (auch bereits bezahlte)
+                // Prüfen WARUM nicht gefunden
                 var latestEntry = await _dbService.GetLatestEntryByLicensePlateAsync(plate);
 
-                if (latestEntry != null && !latestEntry.IsActive)
+                if (latestEntry != null && latestEntry.IsStillInside && !latestEntry.IsActive)
                 {
-                    // Fahrzeug wurde bereits bezahlt
+                    // ✅ HIER kommt jetzt die richtige Meldung!
                     StatusLabel.Text = "Dieses Fahrzeug wurde bereits bezahlt!";
+                    StatusLabel.TextColor = Colors.Red;
+                    InvoiceContainer.IsVisible = false;
+                    return;
                 }
                 else
                 {
-                    // Fahrzeug ist nicht im Parkhaus
                     StatusLabel.Text = "Fahrzeug ist nicht im Parkhaus!";
+                    StatusLabel.TextColor = Colors.Red;
+                    InvoiceContainer.IsVisible = false;
+                    return;
                 }
-
-                StatusLabel.TextColor = Colors.Red;
-                InvoiceContainer.IsVisible = false;
-                return;
             }
 
-            // Rechnung anzeigen
+            // Rechnung anzeigen (nur wenn NICHT bezahlt)
             ShowInvoice(_currentEntry);
             StatusLabel.Text = string.Empty;
         }
@@ -117,6 +118,7 @@ public partial class PaymentPage : ContentPage
             _currentEntry.ExitTime = exitTime;
             _currentEntry.TotalFee = PricingService.CalculateFee(_currentEntry.EntryTime, exitTime);
             _currentEntry.IsActive = false;
+            _currentEntry.IsStillInside = true;
 
             // In Datenbank speichern
             await _dbService.SaveEntryAsync(_currentEntry);
